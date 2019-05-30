@@ -9,7 +9,7 @@ import "typeface-roboto";
 const store = getStore();
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename="/taxi/">
     <Provider store={store}>
       <RootRouter />
     </Provider>

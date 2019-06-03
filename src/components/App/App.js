@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Switch, Route } from "react-router-dom";
+import { Link, Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Grid from "@material-ui/core/Grid";
@@ -91,6 +91,7 @@ class App extends Component {
             <Route path="/login" component={LoginForm} />
             <PrivateRoute path="/map" component={Map} />
             <PrivateRoute path="/profile" component={ProfileForm} />
+            <Redirect to="/login" />
           </Switch>
         </Grid>
       </Grid>

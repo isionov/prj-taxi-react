@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import NumberFormat from "react-number-format";
+import { Redirect } from "react-router-dom";
 
 import { withStyles } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
@@ -76,15 +77,20 @@ function NumberFormatCustom(props) {
 }
 
 class ProfileForm extends Component {
-  render() {
-    const { handleSubmit, classes, saveData } = this.props;
+  state = { mayRedirect: false };
 
-    const submit = values => {
-      saveData(values);
-    };
+  submit = values => {
+    const { saveData } = this.props;
+
+    saveData(values);
+    this.setState({ mayRedirect: true });
+  };
+
+  render() {
+    const { handleSubmit, classes } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(submit)}>
+      <form onSubmit={handleSubmit(this.submit)}>
         <Grid container className={classes.wrap} spacing={24}>
           <Grid item xs={12}>
             <Typography variant="h4" align="center">
@@ -141,6 +147,7 @@ class ProfileForm extends Component {
             </Button>
           </Grid>
         </Grid>
+        {this.state.mayRedirect ? <Redirect to="/map" /> : null}
       </form>
     );
   }
